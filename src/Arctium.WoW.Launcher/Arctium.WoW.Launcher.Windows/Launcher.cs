@@ -178,7 +178,7 @@ namespace Arctium.WoW.Launcher.Windows
             }
             catch (Exception)
             {
-                process.Dispose();
+                process?.Dispose();
                 process?.Kill();
                 
                 WaitAndExit();
