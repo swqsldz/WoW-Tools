@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Arctium WoW Client Launcher</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationIcon>arctium.ico</ApplicationIcon>
+    <TargetFrameworks>net47;netcoreapp2.0</TargetFrameworks>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net47|x64'">
+    <OutputPath>..\..\..\bin\</OutputPath>
+  </PropertyGroup>
+
+  <Import Project="..\Arctium.WoW.Launcher.Core\Arctium.WoW.Launcher.Core.projitems" Label="Shared" />
+</Project>

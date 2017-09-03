@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26823.1
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arctium.WoW.Launcher.Windows", "src\Arctium.WoW.Launcher\Arctium.WoW.Launcher.Windows\Arctium.WoW.Launcher.Windows.csproj", "{A5AFB915-9E72-4086-9B3E-B825F44EA300}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Arctium.WoW.Launcher.Core", "src\Arctium.WoW.Launcher\Arctium.WoW.Launcher.Core\Arctium.WoW.Launcher.Core.shproj", "{F43882C6-B4B7-4749-B4C9-98171088EE85}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\Arctium.WoW.Launcher\Arctium.WoW.Launcher.Core\Arctium.WoW.Tools.Core.projitems*{f43882c6-b4b7-4749-b4c9-98171088ee85}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5AFB915-9E72-4086-9B3E-B825F44EA300}.Debug|x64.ActiveCfg = Debug|x64
+		{A5AFB915-9E72-4086-9B3E-B825F44EA300}.Debug|x64.Build.0 = Debug|x64
+		{A5AFB915-9E72-4086-9B3E-B825F44EA300}.Release|x64.ActiveCfg = Release|x64
+		{A5AFB915-9E72-4086-9B3E-B825F44EA300}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {436CF076-39D3-441F-A03B-243F755BA58E}
+	EndGlobalSection
+EndGlobal
