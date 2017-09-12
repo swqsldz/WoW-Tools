@@ -9,7 +9,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Arctium.WoW.Launcher.Core",
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\Arctium.WoW.Launcher\Arctium.WoW.Launcher.Core\Arctium.WoW.Tools.Core.projitems*{f43882c6-b4b7-4749-b4c9-98171088ee85}*SharedItemsImports = 13
+		src\Arctium.WoW.Launcher\Arctium.WoW.Launcher.Core\Arctium.WoW.Launcher.Core.projitems*{f43882c6-b4b7-4749-b4c9-98171088ee85}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

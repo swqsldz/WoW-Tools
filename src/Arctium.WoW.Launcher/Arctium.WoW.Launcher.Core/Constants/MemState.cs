@@ -5,8 +5,8 @@ namespace Arctium.WoW.Launcher.Core.Constants
 {
     public enum MemState
     {
-		Commit  = 0x1000,
+        Commit  = 0x1000,
         Reserve = 0x2000,
-		Free    = 0x10000
+        Free    = 0x10000
     }
 }

@@ -3,10 +3,10 @@
 
 namespace Arctium.WoW.Launcher.Core.Constants
 {
-	public enum MemType : uint
-	{
+    public enum MemType : uint
+    {
         Private = 0x20000,
         Mapped  = 0x40000,
-		Image   = 0x1000000
-	}
+        Image   = 0x1000000
+    }
 }

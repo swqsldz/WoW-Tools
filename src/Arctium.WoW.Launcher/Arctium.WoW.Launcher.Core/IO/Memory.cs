@@ -27,79 +27,79 @@ namespace Arctium.WoW.Launcher.Core.IO
             ProcessHandle = processHandle;
             PtrSize = IntPtr.Size;
 
-			if (processHandle == IntPtr.Zero)
-				throw new InvalidOperationException("No valid process found.");
+            if (processHandle == IntPtr.Zero)
+                throw new InvalidOperationException("No valid process found.");
             
             BaseAddress = ReadImageBaseFromPEB(processHandle);
 
-			if (BaseAddress == IntPtr.Zero)
-				throw new InvalidOperationException("Error while reading PEB data.");
+            if (BaseAddress == IntPtr.Zero)
+                throw new InvalidOperationException("Error while reading PEB data.");
 
             Initialized = true;
         }
 
-		public IntPtr Read(IntPtr address)
+        public IntPtr Read(IntPtr address)
         {
-			try
-			{
+            try
+            {
                 var buffer = new byte[IntPtr.Size];
 
                 if (ReadProcessMemory(ProcessHandle, address, buffer, buffer.Length, out var dummy))
                     return buffer.ToIntPtr();
 
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
 
-			return IntPtr.Zero;
-		}
+            return IntPtr.Zero;
+        }
 
         public IntPtr Read(long address) => Read(new IntPtr(address));
 
-		public byte[] Read(IntPtr address, int size)
-		{
-			try
-			{
-				var buffer = new byte[size];
+        public byte[] Read(IntPtr address, int size)
+        {
+            try
+            {
+                var buffer = new byte[size];
 
                 if (ReadProcessMemory(ProcessHandle, address, buffer, size, out var dummy))
                     return buffer;
 
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-			}
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
-			return null;
-		}
+            return null;
+        }
 
         public byte[] Read(long address, int size) => Read(new IntPtr(address), size);
 
-		public void Write(IntPtr address, byte[] data)
-		{
-			try
-			{
-				VirtualProtectEx(ProcessHandle, address, (uint)data.Length, 0x80, out var oldProtect);
+        public void Write(IntPtr address, byte[] data)
+        {
+            try
+            {
+                VirtualProtectEx(ProcessHandle, address, (uint)data.Length, 0x80, out var oldProtect);
                
-				WriteProcessMemory(ProcessHandle, address, data, data.Length, out var written);
+                WriteProcessMemory(ProcessHandle, address, data, data.Length, out var written);
 
-				FlushInstructionCache(ProcessHandle, address, (uint)data.Length);
-				VirtualProtectEx(ProcessHandle, address, (uint)data.Length, oldProtect, out oldProtect);
+                FlushInstructionCache(ProcessHandle, address, (uint)data.Length);
+                VirtualProtectEx(ProcessHandle, address, (uint)data.Length, oldProtect, out oldProtect);
 
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
         public void Write(long address, byte[] data) => Write(new IntPtr(address), data);
 
-		public bool RemapView(IntPtr viewAddress, int viewSize, MemProtection newProtection = MemProtection.ExecuteWriteCopy)
-		{
+        public bool RemapView(IntPtr viewAddress, int viewSize, MemProtection newProtection = MemProtection.ExecuteWriteCopy)
+        {
             // Suspend before remapping to prevent crashes.
             NtSuspendProcess(ProcessHandle);
 
@@ -133,13 +133,13 @@ namespace Arctium.WoW.Launcher.Core.IO
             NtResumeProcess(ProcessHandle);
 
             return false;
-		}
+        }
 
         public bool RemapViewBase()
         {
             var mbi = new MemoryBasicInformation();
 
-			if (VirtualQueryEx(ProcessHandle, BaseAddress, out mbi, mbi.Size) != 0)
+            if (VirtualQueryEx(ProcessHandle, BaseAddress, out mbi, mbi.Size) != 0)
                 return RemapView(mbi.BaseAddress, mbi.RegionSize.ToInt32());
 
             return false;
@@ -148,45 +148,45 @@ namespace Arctium.WoW.Launcher.Core.IO
         /// Static functions.
         public static bool ResumeThread(int threadId)
         {
-			var threadHandle = OpenThread(ThreadAccessFlags.SuspendResume, false, (uint)threadId);
+            var threadHandle = OpenThread(ThreadAccessFlags.SuspendResume, false, (uint)threadId);
 
-			if (threadHandle != IntPtr.Zero)
-				return NativeWindows.ResumeThread(threadHandle) != -1;
+            if (threadHandle != IntPtr.Zero)
+                return NativeWindows.ResumeThread(threadHandle) != -1;
 
             return false;
         }
 
         public static bool ResumeThreads(Process process)
         {
-			foreach (ProcessThread thread in process.Threads)
-			{
+            foreach (ProcessThread thread in process.Threads)
+            {
                 if (!ResumeThread(thread.Id))
                     return false;
-			}
+            }
 
             return true;
         }
 
-		public static bool SuspendThread(int threadId)
-		{
-			var threadHandle = OpenThread(ThreadAccessFlags.SuspendResume, false, (uint)threadId);
+        public static bool SuspendThread(int threadId)
+        {
+            var threadHandle = OpenThread(ThreadAccessFlags.SuspendResume, false, (uint)threadId);
 
-			if (threadHandle != IntPtr.Zero)
-				return NativeWindows.SuspendThread(threadHandle) != -1;
+            if (threadHandle != IntPtr.Zero)
+                return NativeWindows.SuspendThread(threadHandle) != -1;
 
-			return false;
-		}
+            return false;
+        }
 
-		public static bool SuspendThreads(Process process)
-		{
-			foreach (ProcessThread thread in process.Threads)
-			{
-				if (!SuspendThread(thread.Id))
-					return false;
-			}
+        public static bool SuspendThreads(Process process)
+        {
+            foreach (ProcessThread thread in process.Threads)
+            {
+                if (!SuspendThread(thread.Id))
+                    return false;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
         /// Private functions.
         IntPtr ReadImageBaseFromPEB(IntPtr processHandle)

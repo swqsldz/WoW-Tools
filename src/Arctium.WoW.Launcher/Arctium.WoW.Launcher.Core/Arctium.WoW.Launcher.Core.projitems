@@ -6,7 +6,7 @@
     <SharedGUID>{F43882C6-B4B7-4749-B4C9-98171088EE85}</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Arctium.WoW.Tools.Core</Import_RootNamespace>
+    <Import_RootNamespace>Arctium.WoW.Launcher.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Misc\" />

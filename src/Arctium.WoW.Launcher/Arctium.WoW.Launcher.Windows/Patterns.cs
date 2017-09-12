@@ -5,24 +5,24 @@ namespace Arctium.WoW.Launcher.Windows
 {
     public class Patterns
     {
-		public static class Common
-		{
-			public static short[] Modulus = { 0x91, 0xD5, 0x9B, 0xB7, 0xD4, 0xE1, 0x83, 0xA5 };
-		}
+        public static class Common
+        {
+            public static short[] Modulus = { 0x91, 0xD5, 0x9B, 0xB7, 0xD4, 0xE1, 0x83, 0xA5 };
+        }
 
-		public static class Live
-		{
-			public static class Win64
-			{
-				// Initialization pointer pattern.
-				public static short[] Init = { 0x48, -1, -1, -1, -1, -1, -1, 0x48, -1, -1, 0x74, -1, 0x41, -1, 0x02, 0x00, 0x00, 0x00, 0xE9 };
+        public static class Live
+        {
+            public static class Win64
+            {
+                // Initialization pointer pattern.
+                public static short[] Init = { 0x48, -1, -1, -1, -1, -1, -1, 0x48, -1, -1, 0x74, -1, 0x41, -1, 0x02, 0x00, 0x00, 0x00, 0xE9 };
 
-				// TODO: Remove Connect patch. Arctium only.
-				public static short[] Connect    = { 0x74, 0x2A, 0x48, -1, -1, -1, -1, 0x04, 0x00, 0x00, 0x00, 0xE8, -1, -1, -1, -1, 0x48 };
-				public static short[] CertBundle = { 0x45, 0x33, 0xC9, 0x48, 0x89, -1, -1, -1, -1, 0x00, 0x00, 0x4C, 0x89, -1, -1, -1, 0x89 };
-				public static short[] Signature  = { 0xEB, 0x02, -1, -1, 0x48, -1, -1, -1, -1, -1, -1, 0x48, -1, -1, -1, -1, -1, -1, -1, 0x48, -1, -1, -1, -1, 0xE8 };
-			}
-		}
+                // TODO: Remove Connect patch. Arctium only.
+                public static short[] Connect    = { 0x74, 0x2A, 0x48, -1, -1, -1, -1, 0x04, 0x00, 0x00, 0x00, 0xE8, -1, -1, -1, -1, 0x48 };
+                public static short[] CertBundle = { 0x45, 0x33, 0xC9, 0x48, 0x89, -1, -1, -1, -1, 0x00, 0x00, 0x4C, 0x89, -1, -1, -1, 0x89 };
+                public static short[] Signature  = { 0xEB, 0x02, -1, -1, 0x48, -1, -1, -1, -1, -1, -1, 0x48, -1, -1, -1, -1, -1, -1, -1, 0x48, -1, -1, -1, -1, 0xE8 };
+            }
+        }
 
         public static class Ptr
         {

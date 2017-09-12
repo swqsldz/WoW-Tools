@@ -9,13 +9,13 @@ namespace Arctium.WoW.Launcher.Core.Structures
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct ProcessBasicInformation
     {
-		public IntPtr ExitStatus;
-		public IntPtr PebBaseAddress;
-		public IntPtr AffinityMask;
-		public IntPtr BasePriority;
-		public IntPtr UniqueProcessId;
-		public IntPtr InheritedFromUniqueProcessId;
+        public IntPtr ExitStatus;
+        public IntPtr PebBaseAddress;
+        public IntPtr AffinityMask;
+        public IntPtr BasePriority;
+        public IntPtr UniqueProcessId;
+        public IntPtr InheritedFromUniqueProcessId;
 
-		public int Size => Marshal.SizeOf(typeof(ProcessBasicInformation));
+        public int Size => Marshal.SizeOf(typeof(ProcessBasicInformation));
     }
 }
