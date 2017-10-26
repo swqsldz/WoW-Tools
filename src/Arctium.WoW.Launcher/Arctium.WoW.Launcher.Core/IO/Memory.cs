@@ -78,11 +78,11 @@ namespace Arctium.WoW.Launcher.Core.IO
 
         public byte[] Read(long address, int size) => Read(new IntPtr(address), size);
 
-        public void Write(IntPtr address, byte[] data)
+        public void Write(IntPtr address, byte[] data, int protect = 0x80)
         {
             try
             {
-                VirtualProtectEx(ProcessHandle, address, (uint)data.Length, 0x80, out var oldProtect);
+                VirtualProtectEx(ProcessHandle, address, (uint)data.Length, (uint)protect, out var oldProtect);
                
                 WriteProcessMemory(ProcessHandle, address, data, data.Length, out var written);
 
@@ -96,7 +96,7 @@ namespace Arctium.WoW.Launcher.Core.IO
             }
         }
 
-        public void Write(long address, byte[] data) => Write(new IntPtr(address), data);
+        public void Write(long address, byte[] data, int protect = 0x80) => Write(new IntPtr(address), data, protect);
 
         public bool RemapView(IntPtr viewAddress, int viewSize, MemProtection newProtection = MemProtection.ExecuteWriteCopy)
         {
@@ -135,12 +135,12 @@ namespace Arctium.WoW.Launcher.Core.IO
             return false;
         }
 
-        public bool RemapViewBase()
+        public bool RemapViewBase(MemProtection newProtection = MemProtection.ExecuteWriteCopy)
         {
             var mbi = new MemoryBasicInformation();
 
             if (VirtualQueryEx(ProcessHandle, BaseAddress, out mbi, mbi.Size) != 0)
-                return RemapView(mbi.BaseAddress, mbi.RegionSize.ToInt32());
+                return RemapView(mbi.BaseAddress, mbi.RegionSize.ToInt32(), newProtection);
 
             return false;
         }
@@ -194,7 +194,7 @@ namespace Arctium.WoW.Launcher.Core.IO
             try
             {
                 if (NtQueryInformationProcess(processHandle, 0, ref peb, peb.Size, out int sizeInfoReturned) == NtStatus.Success)
-                    return Read(peb.PebBaseAddress.ToInt64() + 0x10);
+                    return Read(peb.PebBaseAddress.ToInt64() +  (IntPtr.Size == 4 ? 0x8 : 0x10));
             }
             catch (Exception ex)
             {
